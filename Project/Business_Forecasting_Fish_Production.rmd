@@ -1,0 +1,43 @@
+---
+title: "Business Forecasting for fish production in United States"
+output: html_notebook
+author: "Vallabh Sawant, Gaurav Vishwakarma, Rakshit Karkera"
+---
+
+
+```{r}
+library(fpp)
+
+FP_US <- read_excel("Fish_Production_UnitedStates.xlsx")
+View(FP_US)
+```
+
+```{r}
+FP_US_TS <- ts(FP_US$`Capture fisheries production (metric tons)`, start = c(1960))
+FP_US_TS
+```
+
+```{r}
+class(FP_US_TS)
+plot(FP_US_TS)
+```
+
+```{r}
+summary(FP_US)
+```
+
+```{r}
+Acf(FP_US_TS)
+```
+
+```{r}
+snaive_forecast = snaive(FP_US_TS,5)
+plot (snaive_forecast)
+lines(snaive_forecast$mean, col = 'Red')
+```
+```{r}
+#Trend and Seasonality missing - no beta and no gamma
+ets(FP_US_TS)
+HoltWinters(FP_US_TS,beta=FALSE,gamma=FALSE)
+```
+
