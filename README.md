@@ -7,8 +7,10 @@ This forecast will help understand the amount of fishing that needs to be done t
 We are using various forecasting techniques such as Naïve, Simple Moving Average, Holt-Winters, Regression, Arima, Exponential Smoothing and Random Walk Forest to achieve the goal.
 The best forecasting technique would be decided based on the accuracy measures. We are going to consider MAPE as a good accuracy measure since it is scale independent and can be used to compare different forecast scenarios with ease.
 
-The data could be found inside the data folder --> https://github.com/VallabhSawant/Business_Forecasting_Fish_Production/blob/master/Data/Fish_Production_UnitedStates.xlsx
-The code can be found inside the project folder --> https://github.com/VallabhSawant/Business_Forecasting_Fish_Production/tree/master/Project
+
+Data File - 
+1) Data file --> https://github.com/VallabhSawant/Business_Forecasting_Fish_Production/blob/master/Data/Fish_Production_UnitedStates.xlsx
+2) Code --> https://github.com/VallabhSawant/Business_Forecasting_Fish_Production/tree/master/Project
 
 Project Team Member:
 1. [GauravKumar Vishwakarma](https://github.com/Gaurav-Vish)
