@@ -1,7 +1,9 @@
 # Business_Forecasting_Fish_Production
 Business_Forecasting_Fish_Production
+----
  
 Overview:
+----
 - Our goal is to predict the amount of fish in metric tons that needs to be captured to suffice the needs of population for United States.
 - We plan to do a long forecast of 3 years to predict the same.
 - This forecast will help understand the amount of fishing that needs to be done to suffice the need of the population. 
@@ -12,6 +14,7 @@ Overview:
 - The point forecast identified us that 4931017 metric tons fishes need to captured every year from 2017 to 2019 to suffice the need of the population in United States.
 
 Data Description:
+----
 - The data consists of the amount of fishes captured in metric tons on yearly basis from 1960 to 2016. 
 - We can see that there was a sudden hike in the fish capture till 1988. 
 - This could be due to the advancement in technology where row boats were replaced with motors and fishing increased across the coast. 
@@ -23,6 +26,7 @@ Data Description:
 
 
 Forecasting models used:
+----
 - Naïve
 - Simple Moving Average
 - Holt-Winters
@@ -31,19 +35,22 @@ Forecasting models used:
 - Exponential Smoothing
 - Random Walk Forest
 
-OP :
+Output :
+----
 - Best Model : Arima
 - Point Forecast : 4931017 
 - lo95 : 4156536
 - hi95 : 5705498
 
 
-Data File - 
-1) Data file --> https://github.com/VallabhSawant/Business_Forecasting_Fish_Production/blob/master/Data/Fish_Production_UnitedStates.xlsx
-2) Code --> https://github.com/VallabhSawant/Business_Forecasting_Fish_Production/tree/master/Project
-3) Presentation --> https://github.com/VallabhSawant/Business_Forecasting_Fish_Production/blob/master/Presentation/Analysis%20and%20forecasting%20of%20fishing%20in%20the%20United%20States.pdf
+Files :
+----
+1) [Data file](https://github.com/VallabhSawant/Business_Forecasting_Fish_Production/blob/master/Data/Fish_Production_UnitedStates.xlsx)
+2) [Code](https://github.com/VallabhSawant/Business_Forecasting_Fish_Production/tree/master/Project)
+3) [Presentation](https://github.com/VallabhSawant/Business_Forecasting_Fish_Production/blob/master/Presentation/Analysis%20and%20forecasting%20of%20fishing%20in%20the%20United%20States.pdf)
 
 Project Team Member:
+----
 1. [GauravKumar Vishwakarma](https://github.com/Gaurav-Vish)
 2. [Vallabh Sawant](https://github.com/VallabhSawant)
 3. [Rakshit Karera](https://github.com/Rakshit-Karkera)
