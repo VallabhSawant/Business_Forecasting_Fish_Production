@@ -23,13 +23,13 @@ plot(FP_US_TS, xlab = "Years", ylab = "Captured fishes (in tonnes)")
 grid(nx=NULL, ny=NULL)
 ```
 
-#In the above plot, we can see a sudden rise and the data then gets stable after 1988. Thus we can ignore the previous years and consider the data form 1988 for our forecast.
+#The time series shows trend but no seasionality. Also, in the above plot, we can see a sudden rise and the data then gets stable after 1988. Thus we can ignore the previous years and consider the data form 1988 for our forecast.
 
 ```{r}
 FP_US_TS_recent = window(FP_US_TS,start = c(1988))
 summary(FP_US_TS_recent)
 ```
-
+#The summary shows that the mean has moved more on the higher side since we chose a different window.
 
 ```{r}
 plot(FP_US_TS, xlab = "Years", ylab = "Captured fishes (in tonnes)", main = "Complete data Time series")
@@ -51,14 +51,18 @@ grid(nx=NA, ny=NULL)
 ```{r}
 Acf(FP_US_TS_recent)
 ```
+
+#The Acf shows heavy correlation between the current and the previous point as it is shown in the plot above.
+
 ```{r}
 pacf(FP_US_TS_recent)
 ```
+
+#The pacf also shows significant correlation between the current and the previous point. 
+
 ```{r}
 attributes(FP_US_TS_recent)
 ```
-
-#Acf shows a correlation which states the values are highly dependent on the previous values.
 
 #Naive start
 ```{r}
@@ -66,6 +70,9 @@ naive_forecast = naive(FP_US_TS_recent,3)
 plot(naive_forecast, xlab = "Years", ylab = "Captured fishes (in tonnes)")
 grid(nx=NULL, ny=NULL)
 ```
+
+#The above is the plot of naive model. This model basically considers the previous values and forecasts on the basis of that. Snaive won't be present because the data is not seasonal. So technically, it will work as a naive model.
+
 ```{r}
 attributes(naive_forecast)
 ```
@@ -75,16 +82,20 @@ grid(nx=NULL, ny=NULL)
 ```
 
 #Here we don't see a pattern in the graph. This is a good sign. The residuals are scattered randomly.
+
 ```{r}
 Acf(naive_forecast$residuals, xlab = "Years")
 ```
+
 #Acf shows no correlation between the residuals. This is ideal.
 
 ```{r}
 hist(naive_forecast$residuals)
 grid(nx=NA, ny=NULL)
 ```
-#The residuals seem a bit right skewed. The histogram also tells us that most of the residuals are on the left side of the mean.
+
+#The residuals seem a bit right skewed. Since most of the residuals are around the mean that is 0, it seems good.
+
 ```{r}
 plot(naive_forecast$fitted,naive_forecast$residuals)
 grid(nx=NULL, ny=NULL)
@@ -112,7 +123,8 @@ accuracy(naive_forecast)
 forecast(naive_forecast,h=3)
 ```
 
-#As per Naive, the amount of fish to be captured is every year to suffice the population of US is 493017 metric tons with low of 4483870 metric tons and high of 5378164 metric tons.
+
+#As per Naive, the amount of fish to be captured is every year to suffice the population of US is 493017 metric tons with low of 4483870 metric tons and high of 5378164 metric tons. We can use naive bayes as benchmark for other models.
 
 #Naive end
 
@@ -149,7 +161,9 @@ grid(nx=NULL, ny=NULL)
 SMA_forecast <- forecast(SMA3_forecast,h=6)
 SMA_forecast
 ```
+
 #Our data is dependent on the recent values, thus we have decided to go ahead with SMA with order 3. Since the order is smaller, the weight is larger on the recent period.
+
 ```{r}
 attributes(SMA_forecast)
 ```
@@ -159,6 +173,7 @@ grid(nx=NULL, ny=NULL)
 ```
 
 #Here we don't see a pattern in the graph. This is a good sign. The residuals are scattered randomly.
+
 ```{r}
 Acf(SMA_forecast$residuals, xlab = "Years")
 ```
@@ -168,7 +183,9 @@ Acf(SMA_forecast$residuals, xlab = "Years")
 hist(SMA_forecast$residuals)
 grid(nx=NA, ny=NULL)
 ```
+
 #The residuals seem a bit right skewed. The histogram also tells us that most of the residuals are on the left side of the mean.
+
 ```{r}
 plot(SMA_forecast$fitted,SMA_forecast$residuals)
 grid(nx=NULL, ny=NULL)
@@ -195,12 +212,15 @@ accuracy(SMA_forecast)
 #SMA end
 
 #HW start
+
 ```{r}
 HoltWinters_TS_recent = HoltWinters(FP_US_TS_recent,beta=FALSE,gamma=FALSE)
 plot(HoltWinters_TS_recent, xlab="Years")
 grid(nx=NULL, ny=NULL)
 ```
+
 #We are getting aplha as 0.9999339. This is very close to 1 and states that the current values are heavily depenedent on the most recent values.
+
 ```{r}
 attributes(HoltWinters_TS_recent)
 ```
@@ -209,17 +229,29 @@ HoltWinters_residual <- residuals(HoltWinters(FP_US_TS_recent,beta = FALSE, gamm
 plot(HoltWinters_residual, xlab = "Years")
 grid(nx=NULL, ny=NULL)
 ```
+
+#We don't see any pattern between the residuals. 
+
 ```{r}
 Acf(HoltWinters_residual)
 ```
+
+#The acf states that there is no significant correlation.
+
 ```{r}
 hist(HoltWinters_residual)
 grid(nx=NULL, ny=NULL)
 ```
+
+#The errors are also distributed around the mean that is 0. This seems good.
+
 ```{r}
 plot(HoltWinters_TS_recent$fitted,HoltWinters_residual, xlab = "Years")
 grid(nx=NULL, ny=NULL)
 ```
+
+#The above graph is a comparision of the observed and the factors that affect the graph. Here we see the observed and level the same as there is no seasonality to change it.
+
 ```{r}
 checkresiduals(HoltWinters_TS_recent)
 ```
@@ -231,12 +263,16 @@ grid(nx=NULL, ny=NULL)
 plot.ts(HoltWinters_TS_recent$x,HoltWinters_TS_recent$residuals,xy.labels = FALSE,xy.lines = FALSE, xlab = "Years")
 grid(nx=NULL, ny=NULL)
 ```
+
 ```{r}
 HoltWinters_forecast = forecast(HoltWinters_TS_recent,h=3)
 HoltWinters_forecast
 plot(HoltWinters_forecast)
 grid(nx = NULL, ny = NULL)
 ```
+
+#As per HoltsWinter, the total number of fishses to be captured is 4931025 metric tons.
+
 ```{r}
 accuracy(HoltWinters_forecast)
 ```
@@ -249,6 +285,8 @@ ets_forecast = ets(FP_US_TS_recent)
 plot(ets_forecast, xlab = "Years")
 ```
 
+#Again the observed and level is the same as there is no seasonlaity to influence the data.
+
 ```{r}
 attributes(ets_forecast)
 ```
@@ -257,10 +295,13 @@ attributes(ets_forecast)
 plot(ets_forecast$residuals, xlab = "Years")
 grid(nx=NULL, ny=NULL)
 ```
-# The plot is equally spread residuals around the horizontal line without a distinct pattern. This is a good indication it is not a non-linear relationship.
+
+#The plot is equally spread residuals around the horizontal line without a distinct pattern. This is a good indication it is not a non-linear relationship.
+
 ```{r}
 Acf(ets_forecast$residuals)
 ```
+
 #Here, in the Acf, we don't see any significant lines which states that there is no correlation between the errors.
 
 
@@ -268,7 +309,9 @@ Acf(ets_forecast$residuals)
 hist(ets_forecast$residuals)
 grid(nx=NULL, ny=NULL)
 ```
-#The histogram is right skewed. 
+
+#The histogram is seems normal with an outlier. This seems good for the model.
+
 ```{r}
 checkresiduals(ets_forecast)
 ```
@@ -290,6 +333,9 @@ accuracy(ets_forecast)
 ```{r}
 forecast(ets_forecast,h=3)
 ```
+
+#The decomposition model forecasts that 4931029 metric tons of fishes need to be captured to suffice the needs of United states.
+
 #Decomp end
 
 #ARIMA start
@@ -318,10 +364,12 @@ attributes(Arima_FP_TS)
 plot(Arima_FP_TS$residuals, xlab = "Years")
 grid(nx=NULL, ny=NULL)
 ```
-# The plot is equally spread residuals around the horizontal line without a distinct pattern. This is a good indication it is not a non-linear relationship.
+
+#The plot is equally spread residuals around the horizontal line without a distinct pattern. This is a good indication it is not a non-linear relationship.
 ```{r}
 Acf(Arima_FP_TS$residuals)
 ```
+
 #Here, in the Acf, we don't see any significant lines which states that there is no correlation between the errors.
 
 
@@ -329,6 +377,7 @@ Acf(Arima_FP_TS$residuals)
 hist(Arima_FP_TS$residuals)
 grid(nx=NULL, ny=NULL)
 ```
+
 #The histogram is right skewed. 
 ```{r}
 checkresiduals(Arima_FP_TS)
@@ -348,6 +397,8 @@ grid(nx=NULL, ny=NULL)
 Arima_Forecast = forecast(Arima_FP_TS, h = 3)
 Arima_Forecast
 ```
+
+#The arima model forecasts that 4931017 metric tons of fishes need to be captured to suffice the needs of United states. 
 
 ```{r}
 plot(Arima_Forecast, xlab = "Years", ylab = "Captured fishes (in tonnes)")
@@ -373,9 +424,15 @@ attributes(rwf_forecast)
 plot(rwf_forecast$residuals, xlab ="Years")
 grid(nx=NULL, ny=NULL)
 ```
+
+#Residuals don't show any pattern.
+
 ```{r}
 Acf(rwf_forecast$residuals)
 ```
+
+#Acf shows no sginficant correlation.
+
 ```{r}
 hist(rwf_forecast$residuals)
 grid(nx=NULL, ny=NULL)
@@ -397,6 +454,8 @@ accuracy(rwf_forecast)
 ```{r}
 forecast(rwf_forecast,h=3)
 ```
+
+#The rwf model forecasts that 4931017 metric tons of fishes need to be captured to suffice the needs of United states
 #RWF end
 
 #Regression start
@@ -407,6 +466,7 @@ Regression_forecasts
 ```{r}
 summary(Regression_forecasts)
 ```
+
 #Looking at the summary, it can be seen that if the recent value is considered without any change, the current value will differ by -1.974e-09. For every increase of one metric ton in lag1, the current value will increase by 1.000e+00. The adjusted R-squared value is 1. It says that the variation in the dependent variable is completely dependent on the variation in the independent variable.
 ```{r}
 par(mfrow=c(2,2))
@@ -464,4 +524,4 @@ best_accuracy_MAPE = min(best_accuracy)
 best_accuracy_MAPE
 ```
 
-#As you have seen earlier in Acf and the prediction models that the current value is heavily dependent on the most recent value. Regression gives us the best accuracy because we are using the t+1 (lag1) as a parameter which has high corelation and dependency. But there could be a possible overfit. Thus we go ahead with arima model as it has the second lowest accuracy.
+#As you have seen earlier in Acf and the prediction models that the current value is heavily dependent on the most recent value. Regression gives us the best accuracy because we are using the t+1 (lag1) as a parameter which has high corelation and dependency. But there could be a possible overfit. The second lowest accuracy is SMA but we did see sginificant correlation between the residauls so we will not choose the model. Thus we go ahead with arima model as it has the lowest accuracy compared to others. Thus we go ahead with the arima forecast that 4931029 metric tons of fishes need to be captured to suffice the needs of United states.
