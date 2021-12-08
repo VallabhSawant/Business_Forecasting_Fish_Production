@@ -10,9 +10,9 @@ Business_Forecasting_Fish_Production
 - The point forecast identified us that 4931017 metric tons fishes need to captured every year from 2017 to 2019 to suffice the need of the population in United States.
 
 OP :
-Point Forecast - 4931017 
-lo95 - 4156536
-hi95 - 5705498
+- Point Forecast : 4931017 
+- lo95 : 4156536
+- hi95 : 5705498
 
 
 
