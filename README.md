@@ -41,7 +41,7 @@ OP :
 Data File - 
 1) Data file --> https://github.com/VallabhSawant/Business_Forecasting_Fish_Production/blob/master/Data/Fish_Production_UnitedStates.xlsx
 2) Code --> https://github.com/VallabhSawant/Business_Forecasting_Fish_Production/tree/master/Project
-3) Presentation --> 
+3) Presentation --> https://github.com/VallabhSawant/Business_Forecasting_Fish_Production/blob/master/Presentation/Analysis%20and%20forecasting%20of%20fishing%20in%20the%20United%20States.pdf
 
 Project Team Member:
 1. [GauravKumar Vishwakarma](https://github.com/Gaurav-Vish)
